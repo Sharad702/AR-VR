@@ -2,33 +2,54 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>AR Sample Website</title>
+    <title>7 Wonders of the World in AR</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
     <style>
         body { margin: 0; }
-        #ar-button { position: absolute; top: 10px; right: 10px; z-index: 999; }
+        #qr-code { position: absolute; top: 10px; left: 10px; z-index: 999; }
     </style>
 </head>
 <body>
-    <a-scene embedded arjs='sourceType: webcam;'>
-        <!-- AR Marker -->
-        <a-marker preset="hiro">
-            <!-- 3D Box -->
-            <a-box position="0 0.5 0" color="blue" depth="0.5" height="1" width="1"></a-box>
-            <!-- Text -->
-            <a-text value="Welcome to AR!" position="-1 1 0" color="#FFF"></a-text>
-        </a-marker>
+    <a-scene embedded arjs>
+        <!-- 7 Wonders AR Representations -->
+        
+        <!-- Wonder 1: Great Wall of China -->
+        <a-box position="-2 0.5 -5" color="brown" depth="0.5" height="1" width="3"></a-box>
+        <a-text value="Great Wall of China" position="-2 1.5 -5" color="#FFF"></a-text>
+
+        <!-- Wonder 2: Petra -->
+        <a-box position="2 0.5 -5" color="red" depth="0.5" height="1" width="3"></a-box>
+        <a-text value="Petra" position="2 1.5 -5" color="#FFF"></a-text>
+
+        <!-- Wonder 3: Christ the Redeemer -->
+        <a-box position="-2 0.5 -7" color="gray" depth="0.5" height="1" width="3"></a-box>
+        <a-text value="Christ the Redeemer" position="-2 1.5 -7" color="#FFF"></a-text>
+
+        <!-- Wonder 4: Machu Picchu -->
+        <a-box position="2 0.5 -7" color="green" depth="0.5" height="1" width="3"></a-box>
+        <a-text value="Machu Picchu" position="2 1.5 -7" color="#FFF"></a-text>
+
+        <!-- Wonder 5: Chichen Itza -->
+        <a-box position="-2 0.5 -9" color="tan" depth="0.5" height="1" width="3"></a-box>
+        <a-text value="Chichen Itza" position="-2 1.5 -9" color="#FFF"></a-text>
+
+        <!-- Wonder 6: Roman Colosseum -->
+        <a-box position="2 0.5 -9" color="lightgray" depth="0.5" height="1" width="3"></a-box>
+        <a-text value="Roman Colosseum" position="2 1.5 -9" color="#FFF"></a-text>
+
+        <!-- Wonder 7: Taj Mahal -->
+        <a-box position="0 0.5 -11" color="white" depth="0.5" height="1" width="3"></a-box>
+        <a-text value="Taj Mahal" position="0 1.5 -11" color="#FFF"></a-text>
 
         <a-entity camera></a-entity>
     </a-scene>
 
-    <button id="ar-button">Open AR</button>
+    <!-- QR Code Image (optional) -->
+    <img id="qr-code" src="path/to/your-qr-code.png" alt="QR Code" width="150" />
 
     <script>
-        document.getElementById('ar-button').addEventListener('click', function() {
-            // Additional functionality can be added here if needed
-        });
+        // Add any JavaScript functionality if needed
     </script>
 </body>
 </html>
