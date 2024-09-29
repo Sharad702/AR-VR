@@ -3,37 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Experience with QR Scanner</title>
+    <title>AR Experience: Dubai Landmarks</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.js"></script>
     <style>
-        body { margin: 0; overflow: hidden; }
+        body { margin: 0; background: #000; }
         a-scene { width: 100%; height: 100%; }
-        #scanner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        #video {
-            width: 100%;
-            height: auto;
-        }
+        a-text { font: https://cdn.rawgit.com/aframe-io/aframe/master/examples/fonts/jeremy_blight.fnt; }
     </style>
 </head>
 <body>
-    <div id="scanner">
-        <video id="video" autoplay></video>
-        <p style="color: white;">Scanning for QR Code...</p>
-    </div>
-
     <a-scene embedded arjs='trackingMethod: best;'>
+        <!-- Marker for Burj Khalifa -->
         <a-marker preset="hiro">
             <a-entity 
                 gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/BarramundiFish/glTF/BarramundiFish.gltf)" 
@@ -41,58 +22,59 @@
                 position="0 0 0">
             </a-entity>
             <a-text 
-                value="Barramundi Fish" 
+                value="Burj Khalifa" 
                 position="0 1.5 0" 
                 color="#FFFFFF" 
                 align="center">
             </a-text>
         </a-marker>
+
+        <!-- Marker for Burj Al Arab -->
+        <a-marker preset="kanji">
+            <a-entity 
+                gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/Cube/glTF/Cube.gltf)" 
+                scale="0.5 0.5 0.5" 
+                position="0 0 0">
+            </a-entity>
+            <a-text 
+                value="Burj Al Arab" 
+                position="0 1.5 0" 
+                color="#FFFFFF" 
+                align="center">
+            </a-text>
+        </a-marker>
+
+        <!-- Marker for Dubai Marina -->
+        <a-marker preset="hiro">
+            <a-entity 
+                gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/BarramundiFish/glTF/BarramundiFish.gltf)" 
+                scale="0.1 0.1 0.1" 
+                position="0 0 0">
+            </a-entity>
+            <a-text 
+                value="Dubai Marina" 
+                position="0 1.5 0" 
+                color="#FFFFFF" 
+                align="center">
+            </a-text>
+        </a-marker>
+
+        <!-- Marker for Palm Jumeirah -->
+        <a-marker preset="kanji">
+            <a-entity 
+                gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/Cube/glTF/Cube.gltf)" 
+                scale="0.5 0.5 0.5" 
+                position="0 0 0">
+            </a-entity>
+            <a-text 
+                value="Palm Jumeirah" 
+                position="0 1.5 0" 
+                color="#FFFFFF" 
+                align="center">
+            </a-text>
+        </a-marker>
+
         <a-entity camera></a-entity>
     </a-scene>
-
-    <script>
-        const scanner = document.getElementById('scanner');
-        const video = document.getElementById('video');
-        const constraints = {
-            video: {
-                facingMode: 'environment'
-            }
-        };
-
-        async function startQRScanner() {
-            const stream = await navigator.mediaDevices.getUserMedia(constraints);
-            video.srcObject = stream;
-
-            video.addEventListener('loadedmetadata', () => {
-                video.play();
-                scanner.style.display = 'flex';
-                requestAnimationFrame(scanQRCode);
-            });
-        }
-
-        function scanQRCode() {
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const code = jsQR(imageData.data, canvas.width, canvas.height);
-
-            if (code) {
-                console.log('QR Code found:', code.data);
-                // Here you can redirect or show the AR experience based on the QR code data
-                alert('QR Code Scanned: ' + code.data);
-                scanner.style.display = 'none'; // Hide scanner after scanning
-            } else {
-                requestAnimationFrame(scanQRCode);
-            }
-        }
-
-        // Start the QR scanner when the page loads
-        window.onload = startQRScanner;
-    </script>
 </body>
 </html>
