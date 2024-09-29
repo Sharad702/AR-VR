@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Experience: Dubai Landmarks</title>
+    <title>AR Experience: Luxury in Dubai</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
     <style>
@@ -13,68 +13,63 @@
     </style>
 </head>
 <body>
-    <a-scene embedded arjs='trackingMethod: best;'>
-        <!-- Marker for Burj Khalifa -->
-        <a-marker preset="hiro">
-            <a-entity 
-                gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/BarramundiFish/glTF/BarramundiFish.gltf)" 
-                scale="0.1 0.1 0.1" 
-                position="0 0 0">
-            </a-entity>
-            <a-text 
-                value="Burj Khalifa" 
-                position="0 1.5 0" 
-                color="#FFFFFF" 
-                align="center">
-            </a-text>
-        </a-marker>
+    <a-scene embedded arjs='sourceType: webcam;'>
+        <!-- Burj Khalifa -->
+        <a-entity 
+            gps-entity-place="latitude: 25.1972; longitude: 55.2744;"
+            gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/BarramundiFish/glTF/BarramundiFish.gltf)" 
+            scale="0.1 0.1 0.1">
+        </a-entity>
+        <a-text 
+            value="Burj Khalifa" 
+            gps-entity-place="latitude: 25.1972; longitude: 55.2744;"
+            position="0 1 0" 
+            color="#FFFFFF" 
+            align="center">
+        </a-text>
 
-        <!-- Marker for Burj Al Arab -->
-        <a-marker preset="kanji">
-            <a-entity 
-                gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/Cube/glTF/Cube.gltf)" 
-                scale="0.5 0.5 0.5" 
-                position="0 0 0">
-            </a-entity>
-            <a-text 
-                value="Burj Al Arab" 
-                position="0 1.5 0" 
-                color="#FFFFFF" 
-                align="center">
-            </a-text>
-        </a-marker>
+        <!-- Burj Al Arab -->
+        <a-entity 
+            gps-entity-place="latitude: 25.1413; longitude: 55.1853;"
+            gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/Cube/glTF/Cube.gltf)" 
+            scale="0.1 0.1 0.1">
+        </a-entity>
+        <a-text 
+            value="Burj Al Arab" 
+            gps-entity-place="latitude: 25.1413; longitude: 55.1853;"
+            position="0 1 0" 
+            color="#FFFFFF" 
+            align="center">
+        </a-text>
 
-        <!-- Marker for Dubai Marina -->
-        <a-marker preset="hiro">
-            <a-entity 
-                gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/BarramundiFish/glTF/BarramundiFish.gltf)" 
-                scale="0.1 0.1 0.1" 
-                position="0 0 0">
-            </a-entity>
-            <a-text 
-                value="Dubai Marina" 
-                position="0 1.5 0" 
-                color="#FFFFFF" 
-                align="center">
-            </a-text>
-        </a-marker>
-
-        <!-- Marker for Palm Jumeirah -->
-        <a-marker preset="kanji">
-            <a-entity 
-                gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/Cube/glTF/Cube.gltf)" 
-                scale="0.5 0.5 0.5" 
-                position="0 0 0">
-            </a-entity>
-            <a-text 
-                value="Palm Jumeirah" 
-                position="0 1.5 0" 
-                color="#FFFFFF" 
-                align="center">
-            </a-text>
-        </a-marker>
+        <!-- Dubai Marina -->
+        <a-entity 
+            gps-entity-place="latitude: 25.0786; longitude: 55.1415;"
+            gltf-model="url(https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/2.0/BarramundiFish/glTF/BarramundiFish.gltf)" 
+            scale="0.1 0.1 0.1">
+        </a-entity>
+        <a-text 
+            value="Dubai Marina" 
+            gps-entity-place="latitude: 25.0786; longitude: 55.1415;"
+            position="0 1 0" 
+            color="#FFFFFF" 
+            align="center">
+        </a-text>
 
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        if (!navigator.geolocation) {
+            alert("Geolocation is not supported by this browser.");
+        } else {
+            navigator.geolocation.getCurrentPosition((position) => {
+                console.log('Latitude:', position.coords.latitude);
+                console.log('Longitude:', position.coords.longitude);
+            }, () => {
+                alert('Unable to retrieve your location.');
+            });
+        }
+    </script>
 </body>
 </html>
